@@ -10,19 +10,19 @@ class NoteForm extends HTMLElement {
         this.querySelector('#note-form').addEventListener('submit', this.addNote);
     }
 
-    addNote(event) {
+    async addNote(event) {
         event.preventDefault();
         const title = document.querySelector('#title').value;
         const body = document.querySelector('#body').value;
         const note = { 
-            id: Date.now(), 
             title, 
             body, 
             createdAt: new Date().toISOString(), 
             archived: false 
         };
-        notesData.push(note);
+        await addNote(note);
         renderNotes();
+
     }
 }
 

@@ -7,14 +7,20 @@ async function fetchNotes() {
 }
 
 async function addNote(note) {
-    const response = await fetch(API_URL, {
+    try {
+        const response = await fetch(API_URL, {
+
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(note),
     });
-    return response.json();
+        return response.json();
+    } catch (error) {
+        console.error('Error adding note:', error);
+    }
+
 }
 
 async function deleteNote(noteId) {
@@ -22,5 +28,3 @@ async function deleteNote(noteId) {
         method: 'DELETE',
     });
 }
-
-// Remove the hardcoded notesData array
